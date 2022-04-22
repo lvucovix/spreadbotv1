@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import telebot
+from time import sleep
 
 #importa o bot do telegram
 CHAVE_API = "5105014312:AAF5hja--6ux0Ago26LUzsIsq0KY7P8JMnQ"
@@ -27,13 +28,14 @@ while True:
 
     if (requisicaoStatusBinance == 200) and (requisicaoStatusMB == 200):
       precoBinance = float(requests.get(f'https://api.binance.com/api/v3/ticker/price?symbol={moeda+binanceBase}').json()['price'])
+      sleep(1)
       precoMB = (float(requests.get(f'https://www.mercadobitcoin.net/api/{moeda}/ticker').json()['ticker']['last']))/precoDolar
       porcentoBinancexMB = ((precoBinance/precoMB)-1)*100
       
-      if (porcentoBinancexMB >=15):
+      if (porcentoBinancexMB >=20):
         print(f'Compra {moeda} no MB por {precoMB} vende na Binance por {precoBinance}')
         bot.send_message(-763471222, f'Compra {moeda} no MB por {precoMB} vende na Binance por {precoBinance}')
-      elif (porcentoBinancexMB <=-15):
+      elif (porcentoBinancexMB <=-20):
         print(f'Compra {moeda} na Binance por {precoBinance} vende no MB por {precoMB}')
         bot.send_message(-763471222, f'Compra {moeda} na Binance por {precoBinance} vende no MB por {precoMB}')
 
@@ -49,11 +51,11 @@ while True:
       porcentoMBxNovaDax = ((precoMB/precoNovaDax)-1)*100
 
       
-      if (porcentoMBxNovaDax >=15):
+      if (porcentoMBxNovaDax >=20):
         print(f'Compra {moeda} na NovaDax por {precoNovaDax} vende no MB por {precoMB}')
         bot.send_message(-763471222, f'Compra {moeda} na NovaDax por {precoNovaDax} vende no MB por {precoMB}')
 
-      elif (porcentoMBxNovaDax <=-15):
+      elif (porcentoMBxNovaDax <=-20):
         print(f'Compra {moeda} no MB por {precoMB} vende na NovaDax por {precoNovaDax}')
         bot.send_message(-763471222, f'Compra {moeda} no MB por {precoMB} vende na NovaDax por {precoNovaDax}')
 
@@ -69,9 +71,9 @@ while True:
       porcentoBinancexMB = ((precoBinance/precoNovaDax)-1)*100
 
       
-      if (porcentoBinancexMB >=15):
+      if (porcentoBinancexMB >=20):
         print(f'Compra {moeda} na NovaDax por {precoNovaDax} vende na Binance por {precoBinance}')
         bot.send_message(-763471222, f'Compra {moeda} na NovaDax por {precoNovaDax} vende na Binance por {precoBinance}')
-      elif (porcentoBinancexMB <=-15):
+      elif (porcentoBinancexMB <=-20):
         print(f'Compra {moeda} na Binance por {precoBinance} vende na NovaDax por {precoNovaDax}')
   c+=1
