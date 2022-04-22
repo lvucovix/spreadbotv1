@@ -10,15 +10,16 @@ bot = telebot.TeleBot(CHAVE_API)
 base = pd.read_csv('crypto.csv')
 listaMoedas = base['Simbolo'].tolist()
 
-#preço dólar em real
-precoDolar = float(requests.get('https://economia.awesomeapi.com.br/last/USD-BRL').json()['USDBRL']['bid'])
-print(f'O preço do dólar é: {precoDolar}')
+
 
 #par dolar de cada moeda BINANCE
 binanceBase = 'USDT'
 
 c = 1
 while c <5:
+  #preço dólar em real
+  precoDolar = float(requests.get('https://economia.awesomeapi.com.br/last/USD-BRL').json()['USDBRL']['bid'])
+  print(f'O preço do dólar é: {precoDolar}')  
   print(f'{c}ª verificação')
   #Binance X MB
   print('Verificando Binance x MB') 
